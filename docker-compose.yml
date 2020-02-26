@@ -1,0 +1,18 @@
+# Docker Compose Example
+version: '3'
+
+services:
+  mysql:
+    image: marokanatani/mysql_ja
+    environment:
+      MYSQL_ROOT_PASSWORD: root   #rootユーザのパスワード
+      MYSQL_USER: test            #ユーザアカウント
+      MYSQL_PASSWORD: password    #ユーザアカウントのパスワード
+      MYSQL_DATABASE: test_db     #DB名
+      TZ: "Asia/Tokyo"
+    ports:
+      - 13306:3306
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    #   - ./data:/var/lib/mysql            # 永続化する場合の設定
+    # command: --innodb-use-native-aio=0   # 永続化する場合の設定
